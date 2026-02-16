@@ -1,5 +1,3 @@
-package Bloco1;
-
 public class Exercicio4 {
     public static void main(String[] args) {
         int[] array = {11,2,43,8,23,5,27,18,53};

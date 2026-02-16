@@ -1,4 +1,3 @@
-package Bloco1;
 import java.util.Scanner;
 
 public class Exercicio1 {
