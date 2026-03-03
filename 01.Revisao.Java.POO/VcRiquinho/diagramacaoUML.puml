@@ -1,0 +1,85 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Cliente {
+    - nome: String
+    - email: String
+    - contas: List<Conta>
+    + getNome(): String
+    + getEmail(): String
+    + getContas(): List<Conta>
+    + adicionarConta(conta: Conta): void
+    + {abstract} getTaxaServicoInvestimento(): Double
+}
+
+class ClientePF {
+    - cpf: String
+    + getCpf(): String
+    + getTaxaServicoInvestimento(): Double
+}
+
+class ClientePJ {
+    - cnpj: String
+    + getCnpj(): String
+    + getTaxaServicoInvestimento(): Double
+}
+
+abstract class Conta {
+    - numeroConta: int
+    - saldo: Double
+    + depositar(valor: Double): void
+    + getSaldo(): Double
+    + getNumeroConta(): int
+    + {abstract} simularRendimento(dias: int, taxaCdiMensal: Double): Double
+    + {abstract} calcularTaxaServico(rendimento: Double, cliente: Cliente): Double
+}
+
+class ContaCorrente {
+    + simularRendimento(dias: int, taxaCdiMensal: Double): Double
+    + calcularTaxaServico(rendimento: Double, cliente: Cliente): Double
+}
+
+class ContaCDI {
+    + simularRendimento(dias: int, taxaCdiMensal: Double): Double
+    + calcularTaxaServico(rendimento: Double, cliente: Cliente): Double
+}
+
+class ContaInvestimentoAutomatico {
+    - produtos: List<ProdutoInvestimento>
+    + vincularProduto(produto: ProdutoInvestimento): void
+    + simularRendimento(dias: int, taxaCdiMensal: Double): Double
+    + calcularTaxaServico(rendimento: Double, cliente: Cliente): Double
+}
+
+abstract class ProdutoInvestimento {
+    - nome: String
+    - descricao: String
+    + getNome(): String
+    + {abstract} getRendimentoMensal(): Double
+}
+
+class RendaFixa {
+    - rendimentoMensalFixo: Double
+    - carenciaDias: int
+    + getRendimentoMensal(): Double
+    + getCarenciaDias(): int
+}
+
+class RendaVariavel {
+    - rendimentoMensalEsperado: Double
+    + getRendimentoMensal(): Double
+}
+
+Cliente <|-- ClientePF
+Cliente <|-- ClientePJ
+
+Conta <|-- ContaCorrente
+Conta <|-- ContaCDI
+Conta <|-- ContaInvestimentoAutomatico
+
+ProdutoInvestimento <|-- RendaFixa
+ProdutoInvestimento <|-- RendaVariavel
+
+Cliente "1" *-- "1..*" Conta : possui >
+ContaInvestimentoAutomatico "1" o-- "0..*" ProdutoInvestimento : investe em >
+@enduml
