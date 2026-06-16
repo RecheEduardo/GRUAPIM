@@ -1,0 +1,42 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VS Code (caso abra o projeto nele)
+.vscode/
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+*.swp
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente
+.env
+.env.*
+
+# Spring Boot
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# Lombok
+lombok.config
+
+# Relatórios
+coverage/
